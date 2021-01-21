@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  // DialogContentText,
   DialogTitle,
   TextField,
 } from '@material-ui/core'
@@ -40,6 +39,8 @@ const AddEditGeneralInformation = (props) => {
       phone,
       address,
     }
+    // const gIArray = []
+    // localStorage.setItem('generalInfo', JSON.stringify(gIArray.push(generalInfo)))
     localStorage.setItem('generalInfo', JSON.stringify(generalInfo))
     setFName('')
     setLName('')
