@@ -1,99 +1,148 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import {
+  Button,
+  // Dialog,
+  // DialogActions,
+  // DialogContent,
+  // DialogTitle,
+  TextField,
+  Container,
+  Card,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
-import Button from '@material-ui/core/Button'
-
-import { AddEditGeneralInformation } from './subComponents/generalInformation'
-const GeneralInformation = () => {
-  const [openModal, setOpenModal] = useState(false)
-
-  const handleOpen = () => {
-    setOpenModal(true)
-  }
-
-  const handleClose = () => {
-    setOpenModal(false)
-  }
-
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 650,
+import { useHistory, useLocation } from 'react-router-dom'
+import profile from '../usersData'
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '40ch',
     },
-  })
+  },
+}))
+const GeneralInformation = (props) => {
+  const history = useHistory()
+  const location = useLocation()
+  const classes = useStyles()
+  const [name, setName] = useState('')
+  const [designation, setDesignation] = useState('')
+  const [company, setCompany] = useState('')
+  const [address, setAdress] = useState('')
 
-  function createData(firstName, lastName, address, contactNumber) {
-    return { firstName, lastName, address, contactNumber }
+  const generalInformation = localStorage.getItem('generalInfo')
+  const gI = JSON.parse(generalInformation)
+  useEffect(() => {
+    setName(props.firstName)
+    setDesignation(props.lastName)
+    setCompany(props.phone)
+    setAdress(props.address)
+  }, [props.firstName, props.lastName, props.phone, props.address])
+  const saveGeneralInfo = () => {
+    const generalInfo = {
+      name,
+      designation,
+      company,
+      address,
+    }
+    profile.push(generalInfo)
+    history.push('/profile')
   }
 
-  const rows = [
-    createData('Frozen', 'yoghurt', 'Lahore Pakistan', 2412342),
-    createData('Ice cream', 'sandwich', 'Karachi Pakistan', 2412342),
-    createData('Eclair', 'blohurt', 'Islamabad Pakistan', 2412342),
-    createData('Ginger', 'Frozen', 'Gujrnwala Pakistan', 2412342),
-  ]
-
-  const classes = useStyles()
-
+  console.log('location', location.state.row.name)
   return (
     <div>
+      {' '}
       <br />
       <br />
       <br />
-
-      <Card className="container-fluid">
-        <Grid container>
-          <Grid md={6}>
-            <h4>General Information</h4>
-          </Grid>
-          <Grid md={6}>
-            <Button
-              variant="contained"
-              color="primary"
-              className="float-right"
-              onClick={handleOpen}
-            >
-              Add New
+      <br />
+      <Container maxWidth="sm" align="center">
+        <Card>
+          <form className={classes.root} noValidate autoComplete="off">
+            <TextField
+              id="standard-basic"
+              label="Name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+            />{' '}
+            <br />
+            <TextField
+              id="standard-basic"
+              label="Designation"
+              onChange={(e) => setDesignation(e.target.value)}
+              value={designation}
+            />{' '}
+            <br />
+            <TextField
+              id="standard-basic"
+              label="Company"
+              onChange={(e) => setCompany(e.target.value)}
+              value={company}
+            />{' '}
+            <br />
+            <TextField
+              id="standard-basic"
+              label="Address"
+              color="inherit"
+              onChange={(e) => setAdress(e.target.value)}
+              value={address}
+            />{' '}
+            <br />
+            <br />
+            <Button onClick={saveGeneralInfo} variant="contained" color="primary">
+              Save
             </Button>
-          </Grid>
-        </Grid>
-      </Card>
-      <TableContainer component={Paper} className="container-fluid">
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Address</TableCell>
-              <TableCell>Phone Number</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.firstName}>
-                <TableCell component="th" scope="row">
-                  {row.firstName}
-                </TableCell>
-
-                <TableCell>{row.lastName}</TableCell>
-                <TableCell>{row.address}</TableCell>
-                <TableCell>{row.contactNumber}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <AddEditGeneralInformation openModal={openModal} handleClose={handleClose} />
+            <br />
+          </form>
+        </Card>
+      </Container>
+      {/* <Dialog
+        open={props.open}
+        onClose={props.onClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {'Add New User General Information'}
+        </DialogTitle>
+        <DialogContent>
+          <form className={classes.root} noValidate autoComplete="off">
+            <TextField
+              id="standard-basic"
+              label="First Name"
+              onChange={(e) => setFName(e.target.value)}
+              value={fName}
+            />
+            <TextField
+              id="standard-basic"
+              label="Last Name"
+              onChange={(e) => setLName(e.target.value)}
+              value={lName}
+            />
+            <TextField
+              id="standard-basic"
+              label="Contact Number"
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+            />
+            <TextField
+              id="standard-basic"
+              label="Address"
+              onChange={(e) => setAdress(e.target.value)}
+              value={address}
+            />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={props.onClose} color="primary">
+            Close
+          </Button>
+          <Button onClick={saveGeneralInfo} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog> */}
     </div>
   )
 }
-
 export { GeneralInformation }

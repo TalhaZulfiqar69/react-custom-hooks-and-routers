@@ -13,10 +13,19 @@ import {
   Chip,
 } from '@material-ui/core'
 
+import {
+  Link,
+  useLocation,
+  // useParams,
+  useHistory,
+} from 'react-router-dom'
 import { AddEditGeneralInformation } from './subComponents/generalInformation'
 import { Skills } from './subComponents/skills'
+import profile from '../usersData'
 const Profile = () => {
   useEffect(() => {}, [])
+
+  const history = useHistory()
   const [openGeneralInfoModal, setOpenGeneralInfoModal] = useState(false)
   const [openSkillsModal, setOpenSkillsModal] = useState(false)
 
@@ -49,14 +58,6 @@ const Profile = () => {
   const generalInformation = localStorage.getItem('generalInfo')
   const gI = JSON.parse(generalInformation)
 
-  const rows = [
-    createData('Frozen', 'yoghurt', 'Lahore Pakistan', 2412342),
-    createData('Ice cream', 'sandwich', 'Karachi Pakistan', 2412342),
-    createData('Eclair', 'blohurt', 'Islamabad Pakistan', 2412342),
-    createData('Ginger', 'Frozen', 'Gujrnwala Pakistan', 2412342),
-    createData(gI.fName, gI.lName, gI.phone, gI.address),
-  ]
-
   const classes = useStyles()
 
   const newArr = []
@@ -77,14 +78,12 @@ const Profile = () => {
       <br />
       <br />
       <br />
+      {/* // onClick={handleGeneralInfoOpen} */}
       <Container maxWidth="lg">
-        <Button
-          variant="contained"
-          color="primary"
-          className="float-right"
-          onClick={handleGeneralInfoOpen}
-        >
-          Add New
+        <Button variant="contained" color="primary" className="float-right">
+          <Link to="/add" style={{ color: 'white', textDecoration: 'none' }}>
+            Add New
+          </Link>
         </Button>{' '}
         <br />
         <br />
@@ -92,25 +91,24 @@ const Profile = () => {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>First Name</TableCell>
-                <TableCell>Last Name</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>Designation</TableCell>
                 <TableCell>Address</TableCell>
                 <TableCell>Phone Number</TableCell>
-                <TableCell>Skills Level</TableCell>
-                <TableCell>Edit</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.firstName}>
+              {profile.map((row) => (
+                <TableRow key={row.name}>
                   <TableCell component="th" scope="row">
-                    {row.firstName}
+                    {row.name}
                   </TableCell>
 
-                  <TableCell>{row.lastName}</TableCell>
+                  <TableCell>{row.designation}</TableCell>
                   <TableCell>{row.address}</TableCell>
-                  <TableCell>{row.contactNumber}</TableCell>
-                  <TableCell>
+                  <TableCell>{row.company}</TableCell>
+                  {/* <TableCell>
                     {newArr.length <= 4 ? (
                       <Chip
                         label="Junior"
@@ -127,23 +125,23 @@ const Profile = () => {
                         style={{ backgroundColor: 'green', color: 'white' }}
                       />
                     )}
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={handleGeneralInfoOpen}
+                      onClick={() => history.push('/add', { row })}
                     >
                       Edit
                     </Button>
-                    &nbsp;&nbsp;
+                    {/* &nbsp;&nbsp;
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={handleSkillsOpen}
                     >
                       Skills
-                    </Button>
+                    </Button> */}
                   </TableCell>
                 </TableRow>
               ))}
