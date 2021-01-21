@@ -5,7 +5,7 @@ module.exports = {
     node: true,
   },
   plugins: ['react'],
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: ['plugin:react/recommended'],
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
@@ -18,5 +18,6 @@ module.exports = {
   rules: {
     'no-console': 'warn',
     'no-eval': 'error',
+    'react/prop-types': ['off'],
   },
 }
