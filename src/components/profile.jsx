@@ -20,14 +20,12 @@ import {
   useHistory,
 } from 'react-router-dom'
 import { AddEditGeneralInformation } from './subComponents/generalInformation'
-import { Skills } from './subComponents/skills'
 import profile from '../usersData'
 const Profile = () => {
   useEffect(() => {}, [])
 
   const history = useHistory()
   const [openGeneralInfoModal, setOpenGeneralInfoModal] = useState(false)
-  const [openSkillsModal, setOpenSkillsModal] = useState(false)
 
   const handleGeneralInfoOpen = () => {
     setOpenGeneralInfoModal(true)
@@ -37,48 +35,22 @@ const Profile = () => {
     setOpenGeneralInfoModal(false)
   }
 
-  const handleSkillsOpen = () => {
-    setOpenSkillsModal(true)
-  }
-
-  const handleSkillsClose = () => {
-    setOpenSkillsModal(false)
-  }
-
   const useStyles = makeStyles({
     table: {
       minWidth: 650,
     },
   })
 
-  function createData(firstName, lastName, contactNumber, address) {
-    return { firstName, lastName, address, contactNumber }
-  }
-
   const generalInformation = localStorage.getItem('generalInfo')
   const gI = JSON.parse(generalInformation)
 
   const classes = useStyles()
-
-  const newArr = []
-  const skillsArray = localStorage.getItem('skills')
-  if (skillsArray) {
-    const arr = skillsArray.split(',')
-
-    arr.forEach((ele) => {
-      const obj = {}
-      obj.value = ele
-      obj.name = ele
-      newArr.push(obj)
-    })
-  }
 
   return (
     <div>
       <br />
       <br />
       <br />
-      {/* // onClick={handleGeneralInfoOpen} */}
       <Container maxWidth="lg">
         <Button variant="contained" color="primary" className="float-right">
           <Link to="/add" style={{ color: 'white', textDecoration: 'none' }}>
@@ -108,40 +80,14 @@ const Profile = () => {
                   <TableCell>{row.designation}</TableCell>
                   <TableCell>{row.address}</TableCell>
                   <TableCell>{row.company}</TableCell>
-                  {/* <TableCell>
-                    {newArr.length <= 4 ? (
-                      <Chip
-                        label="Junior"
-                        style={{ backgroundColor: 'red', color: 'white' }}
-                      />
-                    ) : newArr.length <= 7 ? (
-                      <Chip
-                        label="Mediocer"
-                        style={{ backgroundColor: 'yelow', color: 'white' }}
-                      />
-                    ) : (
-                      <Chip
-                        label="Expert"
-                        style={{ backgroundColor: 'green', color: 'white' }}
-                      />
-                    )}
-                  </TableCell> */}
                   <TableCell>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => history.push('/add', { row })}
+                      onClick={() => history.push('/edit', { row })}
                     >
                       Edit
                     </Button>
-                    {/* &nbsp;&nbsp;
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSkillsOpen}
-                    >
-                      Skills
-                    </Button> */}
                   </TableCell>
                 </TableRow>
               ))}
@@ -153,17 +99,6 @@ const Profile = () => {
         <AddEditGeneralInformation
           open={openGeneralInfoModal}
           onClose={handleGeneralInfoClose}
-          firstName={gI.fName}
-          lastName={gI.lName}
-          phone={gI.phone}
-          address={gI.address}
-        />
-      )}
-
-      {openSkillsModal && (
-        <Skills
-          open={openSkillsModal}
-          onClose={handleSkillsClose}
           firstName={gI.fName}
           lastName={gI.lName}
           phone={gI.phone}

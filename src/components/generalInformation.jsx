@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import {
-  Button,
-  // Dialog,
-  // DialogActions,
-  // DialogContent,
-  // DialogTitle,
-  TextField,
-  Container,
-  Card,
-} from '@material-ui/core'
+import React, { useEffect, useState, useRef } from 'react'
+import { Button, TextField, Container, Card } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import profile from '../usersData'
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,8 +13,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 const GeneralInformation = (props) => {
   const history = useHistory()
-  const location = useLocation()
   const classes = useStyles()
+
+  const nameRef = useRef('')
+  const designationRef = useRef('')
+  const companyRef = useRef('')
+  const addressRef = useRef('')
   const [name, setName] = useState('')
   const [designation, setDesignation] = useState('')
   const [company, setCompany] = useState('')
@@ -38,7 +33,9 @@ const GeneralInformation = (props) => {
     setAdress(props.address)
   }, [props.firstName, props.lastName, props.phone, props.address])
   const saveGeneralInfo = () => {
+    const id = Math.floor(Math.random(1, 15) * 5)
     const generalInfo = {
+      id,
       name,
       designation,
       company,
@@ -47,8 +44,6 @@ const GeneralInformation = (props) => {
     profile.push(generalInfo)
     history.push('/profile')
   }
-
-  console.log('location', location.state.row.name)
   return (
     <div>
       {' '}
@@ -60,32 +55,44 @@ const GeneralInformation = (props) => {
         <Card>
           <form className={classes.root} noValidate autoComplete="off">
             <TextField
-              id="standard-basic"
+              inputRef={nameRef}
+              id="name"
               label="Name"
               onChange={(e) => setName(e.target.value)}
               value={name}
+              error={name === ''}
+              helperText={name === '' ? 'Name field is required' : ' '}
             />{' '}
             <br />
             <TextField
-              id="standard-basic"
+              inputRef={designationRef}
+              id="designation"
               label="Designation"
               onChange={(e) => setDesignation(e.target.value)}
               value={designation}
+              error={designation === ''}
+              helperText={designation === '' ? 'Designation field is required' : ' '}
             />{' '}
             <br />
             <TextField
-              id="standard-basic"
+              inputRef={companyRef}
+              id="company"
               label="Company"
               onChange={(e) => setCompany(e.target.value)}
               value={company}
+              error={company === ''}
+              helperText={company === '' ? 'Company field is required' : ' '}
             />{' '}
             <br />
             <TextField
-              id="standard-basic"
+              inputRef={addressRef}
+              id="address"
               label="Address"
               color="inherit"
               onChange={(e) => setAdress(e.target.value)}
               value={address}
+              error={address === ''}
+              helperText={address === '' ? 'Address field is required' : ' '}
             />{' '}
             <br />
             <br />
@@ -96,52 +103,6 @@ const GeneralInformation = (props) => {
           </form>
         </Card>
       </Container>
-      {/* <Dialog
-        open={props.open}
-        onClose={props.onClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {'Add New User General Information'}
-        </DialogTitle>
-        <DialogContent>
-          <form className={classes.root} noValidate autoComplete="off">
-            <TextField
-              id="standard-basic"
-              label="First Name"
-              onChange={(e) => setFName(e.target.value)}
-              value={fName}
-            />
-            <TextField
-              id="standard-basic"
-              label="Last Name"
-              onChange={(e) => setLName(e.target.value)}
-              value={lName}
-            />
-            <TextField
-              id="standard-basic"
-              label="Contact Number"
-              onChange={(e) => setPhone(e.target.value)}
-              value={phone}
-            />
-            <TextField
-              id="standard-basic"
-              label="Address"
-              onChange={(e) => setAdress(e.target.value)}
-              value={address}
-            />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={props.onClose} color="primary">
-            Close
-          </Button>
-          <Button onClick={saveGeneralInfo} color="primary">
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog> */}
     </div>
   )
 }

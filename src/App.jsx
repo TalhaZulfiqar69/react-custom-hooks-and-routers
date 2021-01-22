@@ -13,6 +13,7 @@ import {
 import { Profile } from './components/profile'
 import { About } from './components/About'
 import { GeneralInformation } from './components/generalInformation'
+import { EditGeneralInformation } from './components/editGeneralInformation'
 function App() {
   return (
     <div>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/about" component={About} />
           <Route path="/add" exact component={GeneralInformation} />
+          <Route path="/edit" exact component={EditGeneralInformation} />
         </Switch>
       </Router>
     </div>
