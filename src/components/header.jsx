@@ -26,6 +26,10 @@ const Header = () => {
           <Link to="/react-select" style={style}>
             React Select
           </Link>
+          &nbsp;&nbsp;&nbsp;
+          <Link to="/react-table" style={style}>
+            React Table
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
