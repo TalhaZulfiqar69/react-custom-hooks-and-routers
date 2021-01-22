@@ -16,7 +16,7 @@ const options = [
 const ReactSelect = () => {
   const [selectedOption, setSelectedOption] = useState(null)
 
-  let selectRef = useRef(selectedOption)
+  const selectRef = useRef(null)
   const handleChange = (selectedOption) => {
     setSelectedOption({ selectedOption })
     selectRef.current = selectedOption.value
@@ -24,7 +24,7 @@ const ReactSelect = () => {
   return (
     <div>
       <br /> <br /> <br />
-      <Select onChange={handleChange} options={options} />
+      <Select onChange={handleChange} options={options} ref={selectRef} />
       <h3>{selectRef.current}</h3>
     </div>
   )
