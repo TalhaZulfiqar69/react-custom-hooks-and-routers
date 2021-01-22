@@ -19,6 +19,7 @@ const GeneralInformation = (props) => {
   const designationRef = useRef('')
   const companyRef = useRef('')
   const addressRef = useRef('')
+
   const [name, setName] = useState('')
   const [designation, setDesignation] = useState('')
   const [company, setCompany] = useState('')

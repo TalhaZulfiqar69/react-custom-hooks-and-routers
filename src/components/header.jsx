@@ -5,17 +5,12 @@ import {
   // useLocation,
   // useParams,
 } from 'react-router-dom'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-// import Button from '@material-ui/core/Button'
+import { AppBar, Toolbar, Typography } from '@material-ui/core'
 
 const Header = () => {
   const style = { color: 'white', textDecoration: 'none' }
-  //   const navbarStyle = { marginBottom: '30px' }
   return (
     <div>
-      {/* <Router style={{ marginBottom: '30px' }}> */}
       <AppBar>
         <Toolbar>
           <Typography variant="title" color="inherit">
@@ -28,17 +23,11 @@ const Header = () => {
             Profile
           </Link>
           &nbsp;&nbsp;&nbsp;
-          <Link to="/about" style={style}>
-            About
+          <Link to="/react-select" style={style}>
+            React Select
           </Link>
         </Toolbar>
       </AppBar>
-
-      {/* <Switch>
-          <Route path="/profile" component={Profile} />
-          <Route path="/about" component={About} />
-        </Switch> */}
-      {/* </Router> */}
     </div>
   )
 }

@@ -14,6 +14,7 @@ import { Profile } from './components/profile'
 import { About } from './components/About'
 import { GeneralInformation } from './components/generalInformation'
 import { EditGeneralInformation } from './components/editGeneralInformation'
+import { ReactSelect } from './components/reactSelect'
 function App() {
   return (
     <div>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/about" component={About} />
           <Route path="/add" exact component={GeneralInformation} />
           <Route path="/edit" exact component={EditGeneralInformation} />
+          <Route path="/react-select" exact component={ReactSelect} />
         </Switch>
       </Router>
     </div>

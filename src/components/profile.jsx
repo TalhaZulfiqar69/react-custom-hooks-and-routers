@@ -15,7 +15,6 @@ import {
 
 import {
   Link,
-  useLocation,
   // useParams,
   useHistory,
 } from 'react-router-dom'
@@ -25,15 +24,6 @@ const Profile = () => {
   useEffect(() => {}, [])
 
   const history = useHistory()
-  const [openGeneralInfoModal, setOpenGeneralInfoModal] = useState(false)
-
-  const handleGeneralInfoOpen = () => {
-    setOpenGeneralInfoModal(true)
-  }
-
-  const handleGeneralInfoClose = () => {
-    setOpenGeneralInfoModal(false)
-  }
 
   const useStyles = makeStyles({
     table: {
@@ -95,16 +85,8 @@ const Profile = () => {
           </Table>
         </TableContainer>
       </Container>
-      {openGeneralInfoModal && (
-        <AddEditGeneralInformation
-          open={openGeneralInfoModal}
-          onClose={handleGeneralInfoClose}
-          firstName={gI.fName}
-          lastName={gI.lName}
-          phone={gI.phone}
-          address={gI.address}
-        />
-      )}
+
+      <AddEditGeneralInformation />
     </div>
   )
 }
