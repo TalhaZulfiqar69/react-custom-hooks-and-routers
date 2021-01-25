@@ -66,11 +66,9 @@ const ReactTableExample = () => {
     rows,
     prepareRow,
   } = useTable({ columns, data }, useSortBy)
+  const style = { marginTop: '100px' }
   return (
-    <Container size="lg">
-      <br />
-      <br />
-      <br />
+    <Container size="lg" style={style}>
       <Table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
         <thead>
           {headerGroups.map((headerGroup) => (
