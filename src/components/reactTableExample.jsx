@@ -4,7 +4,6 @@ import { Table, Container, Button } from '@material-ui/core'
 import profile from '../usersData'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
-// import { ArrowDownwardIcon, ArrowUpwardIcon } from '@material-ui/icons'
 import {
   // useParams,
   useHistory,
@@ -50,12 +49,7 @@ const ReactTableExample = () => {
             variant="contained"
             color="primary"
             value={cell.accessor}
-            onClick={() =>
-              // console.log('data', cell.row.original.name)
-
-              history.push('/edit-user', { rows: cell.row.original })
-            }
-            // onClick={() => history.push('/edit', { rows })}
+            onClick={() => history.push('/edit-user', { rows: cell.row.original })}
           >
             Edit
           </Button>
