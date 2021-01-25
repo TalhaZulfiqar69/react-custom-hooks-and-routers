@@ -17,16 +17,18 @@ const options = [
 const ReactSelect = () => {
   const [selectedOption, setSelectedOption] = useState(null)
 
-  const selectRef = useRef(null)
+  const selectRef = useRef()
   const handleChange = (selectedOption) => {
     setSelectedOption({ selectedOption })
-    // selectRef.current = selectedOption.value
   }
 
   const changeDefaultValue = () => {
     // selectRef.current.props.changeDefaultValue === options[2]
     console.log('selectRef.current', selectRef.current.props.defaultValue)
     console.log('the default value', options[2])
+
+    selectRef.current.props.defaultValue = options[2]
+    // selectRef.current = selectedOption.defaultValue
     // console.log('changeDefaultValue called')
   }
 
@@ -36,15 +38,16 @@ const ReactSelect = () => {
       <br />
       <Container size="xs">
         <Select
-          onChange={handleChange}
-          options={options}
           ref={selectRef}
+          onChange={() => {
+            {
+              handleChange(), changeDefaultValue()
+            }
+          }}
+          options={options}
           defaultValue={options[0]}
         />{' '}
         <br />
-        <Button color="primary" variant="contained" onClick={changeDefaultValue}>
-          Change Value
-        </Button>
         {/* <h3>{selectRef.current}</h3> */}
       </Container>
     </div>

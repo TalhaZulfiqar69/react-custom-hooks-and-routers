@@ -16,6 +16,7 @@ import { GeneralInformation } from './components/generalInformation'
 import { EditGeneralInformation } from './components/editGeneralInformation'
 import { ReactSelect } from './components/reactSelect'
 import { ReactTableExample } from './components/reactTableExample'
+import { EditUser } from './components/editUser'
 function App() {
   return (
     <div>
@@ -28,6 +29,7 @@ function App() {
           <Route path="/edit" exact component={EditGeneralInformation} />
           <Route path="/react-select" exact component={ReactSelect} />
           <Route path="/react-table" exact component={ReactTableExample} />
+          <Route path="/edit-user" exact component={EditUser} />
         </Switch>
       </Router>
     </div>
