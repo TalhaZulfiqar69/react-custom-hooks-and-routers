@@ -19,18 +19,20 @@ const ForgetPassword = () => {
 
   const emailRef = useRef()
   const [emailError, setEmailError] = useState()
-  const history = useHistory()
-
+  const [emailInfo, setEmailInfo] = useState()
   const sendResetPasswordLink = () => {
     var auth = firebase.auth()
     auth
       .sendPasswordResetEmail(emailRef.current.value)
       .then(function () {
         // Email sent.
-        alert('Email sended')
+        setEmailError('')
+        setEmailInfo('Email sended. Please check you mail box')
       })
       .catch(function (error) {
-        console.log('error', error)
+        // console.log('error', error)
+        setEmailInfo('')
+        setEmailError('User with this email is not existed')
         // An error happened.
       })
   }
@@ -42,6 +44,7 @@ const ForgetPassword = () => {
           <Grid item xs={4}></Grid>
           <Grid item xs={4}>
             <Card style={{ padding: '20px' }}>
+              {emailInfo && <Alert severity="success">{emailInfo}</Alert>}
               {emailError && <Alert severity="error">{emailError}</Alert>}
               <form
                 // ref={formRef}
