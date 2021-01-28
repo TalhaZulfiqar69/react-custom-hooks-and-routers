@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Card, Grid, TextField, Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
@@ -17,16 +17,20 @@ const useStyles = makeStyles((theme) => ({
   top: {
     marginTop: 100,
   },
+  bottom: {
+    marginBottom: 50,
+  },
 }))
 
 const userProfile = () => {
   const classes = useStyles()
   const location = useLocation()
+  const history = useHistory()
   const [data, setData] = useState()
 
   useEffect(() => {
     var loginedUser = firebase.auth().currentUser
-    // console.log('loginedUser', firebase.auth().currentUser.email)
+
     db.collection('userDetails')
       .where('userId', '==', loginedUser.uid)
       .get()
@@ -41,17 +45,26 @@ const userProfile = () => {
       .catch(function (error) {
         console.log('Error getting documents: ', error)
       })
-
-    // var userss = firebase.auth().currentUser
-    // console.log('Current User', userss)
   }, [])
 
+  const logoutUser = () => {
+    firebase.auth().signOut()
+    history.push('/login')
+  }
   return (
     <div className={classes.top}>
       <Container size="sm">
         <Grid container spacing={3}>
           <Grid item xs={10}>
             <Card style={{ padding: '20px' }}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.bottom}
+                onClick={logoutUser}
+              >
+                Logout
+              </Button>
               <h5>Welcome:</h5>
               <h6>{firebase.auth().currentUser.email}</h6>
               {data &&

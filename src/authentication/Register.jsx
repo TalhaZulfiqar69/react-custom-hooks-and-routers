@@ -38,8 +38,6 @@ const Register = () => {
         setPasswordError('')
         var user = userCredential.user
 
-        console.log('the new registered user', user.uid)
-        console.log('the new registered user', user.email)
         emailRef.current.value = ''
         passwordRef.current.value = ''
         confirmPasswordRef.current.value = ''

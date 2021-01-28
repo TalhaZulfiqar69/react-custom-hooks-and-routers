@@ -29,8 +29,7 @@ const Login = () => {
       .then((userCredential) => {
         setPasswordError('')
         var user = userCredential.user
-        console.log('the user email after login', user.email)
-        console.log('the user after login', user)
+
         emailRef.current.value = ''
         passwordRef.current.value = ''
 
