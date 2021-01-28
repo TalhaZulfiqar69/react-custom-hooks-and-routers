@@ -26,29 +26,33 @@ import { RegistrationStep2 } from './authentication/RegistrationStep2'
 import { userProfile } from './authentication/profile'
 import { ForgetPassword } from './authentication/ForgerPassword'
 // import { PrivateRoutes } from './authentication/PrivateRoutes'
+import { AuthProvider } from './authentication/PrivateRoutes'
+
 function App() {
   return (
     <div>
-      <Router>
-        <Header />
-        <Switch>
-          {/* <Route path="/profile" exact component={Profile} /> */}
-          <Route path="/about" exact component={About} />
-          <Route path="/add" exact component={GeneralInformation} />
-          <Route path="/edit" exact component={EditGeneralInformation} />
-          <Route path="/react-select" exact component={ReactSelect} />
-          <Route path="/react-table" exact component={ReactTableExample} />
-          <Route path="/edit-user" exact component={EditUser} />
-          {/* <Route path="/login" exact component={Login} />
+      <AuthProvider>
+        <Router>
+          <Header />
+          <Switch>
+            {/* <Route path="/profile" exact component={Profile} /> */}
+            <Route path="/about" exact component={About} />
+            <Route path="/add" exact component={GeneralInformation} />
+            <Route path="/edit" exact component={EditGeneralInformation} />
+            <Route path="/react-select" exact component={ReactSelect} />
+            <Route path="/react-table" exact component={ReactTableExample} />
+            <Route path="/edit-user" exact component={EditUser} />
+            {/* <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} /> */}
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/register-step-2" exact component={RegistrationStep2} />
-          <Route path="/profile" exact component={userProfile} />
-          <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/forget-password" exact component={ForgetPassword} />
-        </Switch>
-      </Router>
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <Route path="/register-step-2" exact component={RegistrationStep2} />
+            <Route path="/profile" exact component={userProfile} />
+            <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/forget-password" exact component={ForgetPassword} />
+          </Switch>
+        </Router>
+      </AuthProvider>
     </div>
   )
 }

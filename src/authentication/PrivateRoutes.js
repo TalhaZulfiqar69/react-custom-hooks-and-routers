@@ -1,19 +1,22 @@
-// import React from 'react'
-// import { Router, Redirect } from 'react-router-dom'
-// // import auth from 'auth'
-// const PrivateRoutes = ({ component: Component, ...rest }) => {
-//   return (
-//     <Router
-//       {...rest}
-//       render={(props) => {
-//         if (auth.isAuthenticated()) {
-//           return <Component {...props} />
-//         } else {
-//           return <Redirect to={(pathame = '/login')} />
-//         }
-//       }}
-//     />
-//   )
-// }
+import React, { useEffect, useState } from 'react'
+import { firebaseConfig } from '../util/firebase'
 
-// export { PrivateRoutes }
+const AuthContext = React.createContext()
+
+const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true)
+  const [currentUser, setCurrentUser] = useState(null)
+  useEffect(() => {
+    firebaseConfig.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user)
+      setLoading(false)
+    })
+  }, [])
+  if (loading) {
+    return <p>Loading...</p>
+  }
+  return (
+    <AuthContext.Provider value={{ currentUser }}>{children}</AuthContext.Provider>
+  )
+}
+export { AuthContext, AuthProvider }

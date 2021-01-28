@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 
-import { useLocation, useHistory } from 'react-router-dom'
+import { useLocation, useHistory, Redirect } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Card, Grid, TextField, Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 
-import { firebase, db } from '../util/firebase'
+import { firebase, db, firebaseConfig } from '../util/firebase'
+import { AuthContext } from './PrivateRoutes'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const userProfile = () => {
+  const { currentUser } = useContext(AuthContext)
+  if (!currentUser) {
+    return <Redirect to="/login" />
+  }
   const classes = useStyles()
   const location = useLocation()
   const history = useHistory()
