@@ -1,66 +1,64 @@
 import React, { useMemo, useEffect, useState } from 'react'
 import { Button, Container, Table, Grid } from '@material-ui/core'
-import { firebase, db } from '../util/firebase'
+import firebase from '../util/firebase'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useTable } from 'react-table'
 import profile from '../usersData'
-const Dashboard = () => {
+const TableBody = () => {
   const style = { marginTop: '100px' }
   const history = useHistory()
   const location = useLocation()
-  const [allUsers, setAllUsers] = useState([])
+  const [myUsers, setMyUsers] = useState()
 
   const logoutUser = () => {
     firebase.auth().signOut()
     history.push('/login')
   }
 
-  // const getAllUsers = () => {
-  //   db.collection('users')
-  //     .get()
-  //     .then((snapshot) => {
-  //       const users = []
-  //       snapshot.forEach((docs) => {
-  //         const data = docs.data()
-  //         console.log('data', data)
-  //         users.push(data)
-  //       })
-  //       setAllUsers(users)
-  //       console.log('users in function', users)
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }
+  const getAllUsers = () => {
+    // const todoRef = firebaseConfig.database().ref('User')
+    // todoRef.on('value', (snapshot) => {
+    //   const user = snapshot.val()
+    // const userList = []
+    // for (let id in user) {
+    //   userList.push({ id, ...user[id] })
+    // }
+    // setUsers(userList)
+    // setTodoList(todoList);
+    // })
 
+    const usersRef = firebase.database().ref('users')
+
+    usersRef.on('value', (snapshot) => {
+      const allUsers = snapshot.val()
+
+      const usersList = []
+      for (let id in allUsers) {
+        usersList.push({ id, ...allUsers[id] })
+      }
+      setMyUsers(usersList)
+    })
+  }
+
+  // console.log('the usersList ahdsakjd', myUsers)
   useEffect(() => {
-    // if (allUsers.length > 0) return
-    // console.log('getAllUsers()')
-    // getAllUsers()
+    getAllUsers
   }, [])
 
-  const data = useMemo(() => profile, [profile])
+  const data = useMemo(() => myUsers, [myUsers])
 
   const columns = useMemo(() => [
     {
-      Header: 'First Name',
-      accessor: 'first_name',
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'last_name',
+      Header: 'Name',
+      accessor: 'name',
     },
     {
       Header: 'Email',
       accessor: 'email',
     },
     {
-      Header: 'Company',
-      accessor: 'company',
-    },
-    {
-      Header: 'Designation',
-      accessor: 'designation',
+      Header: 'Password',
+      accessor: 'password',
     },
     {
       Header: 'Action',
@@ -90,15 +88,13 @@ const Dashboard = () => {
   const addNewUser = () => {
     console.log('New use is going to be add')
   }
-
-  // console.log('allUsers here', allUsers)
   return (
     <Container size="sm">
       <div style={style}>
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <h4>Welcome:</h4>
-            {/* <h5>{location.state.email}</h5> */}
+            <h5>{location.state.email}</h5>
           </Grid>
           <Grid item xs={5}></Grid>
           <Grid item xs={3}>
@@ -165,4 +161,4 @@ const Dashboard = () => {
     </Container>
   )
 }
-export { Dashboard }
+export { TableBody }

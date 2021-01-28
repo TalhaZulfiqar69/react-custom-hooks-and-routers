@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Container, Card, Grid, TextField, Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 import { makeStyles } from '@material-ui/core/styles'
-import firebase from '../util/firebase'
+import { firebase } from '../util/firebase'
 import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -36,13 +36,14 @@ const Register = () => {
       )
       .then((userCredential) => {
         setPasswordError('')
-        var user = userCredential.user.email
+        var user = userCredential.user
 
-        console.log('the new registered user', user)
+        console.log('the new registered user', user.uid)
+        console.log('the new registered user', user.email)
         emailRef.current.value = ''
         passwordRef.current.value = ''
         confirmPasswordRef.current.value = ''
-        history.push('/dashboard', { user })
+        history.push('/register-step-2', { userId: user.uid })
       })
       .catch((error) => {
         const errorCode = error.code
@@ -58,12 +59,7 @@ const Register = () => {
           <Grid item xs={4}>
             <Card style={{ padding: '20px' }}>
               {passwordError && <Alert severity="error">{passwordError}</Alert>}
-              <form
-                // ref={formRef}
-                className={classes.root}
-                noValidate
-                autoComplete="off"
-              >
+              <form className={classes.root} noValidate autoComplete="off">
                 <TextField
                   inputRef={emailRef}
                   id="standard-basic"

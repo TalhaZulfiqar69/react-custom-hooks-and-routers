@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Container, Card, Grid, TextField, Button } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
 import { makeStyles } from '@material-ui/core/styles'
-import firebase from '../util/firebase'
+import { firebase } from '../util/firebase'
 import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +34,7 @@ const Login = () => {
         emailRef.current.value = ''
         passwordRef.current.value = ''
 
-        history.push('/dashboard')
+        history.push('/dashboard', { email: user.email })
       })
       .catch((error) => {
         setPasswordError('Email or password is incorrect')

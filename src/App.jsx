@@ -22,9 +22,8 @@ import { EditUser } from './components/editUser'
 import { Login } from './authentication/Login'
 import { Register } from './authentication/Register'
 import { Dashboard } from './authentication/dashboard'
+import { RegistrationStep2 } from './authentication/RegistrationStep2'
 function App() {
-  // const location = useLocation()
-  // console.log('user shshhs', location.state.user)
   return (
     <div>
       <Router>
@@ -41,6 +40,7 @@ function App() {
           <Route path="/register" exact component={Register} /> */}
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <Route path="/register-step-2" exact component={RegistrationStep2} />
           <Route path="/dashboard" exact component={Dashboard} />
         </Switch>
       </Router>
