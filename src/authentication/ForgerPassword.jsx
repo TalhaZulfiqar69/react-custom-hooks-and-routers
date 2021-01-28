@@ -13,34 +13,25 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }))
-const Login = () => {
+const ForgetPassword = () => {
   const classes = useStyles()
   const style = { marginTop: '100px' }
 
   const emailRef = useRef()
-  const passwordRef = useRef()
-  const [passwordError, setPasswordError] = useState()
+  const [emailError, setEmailError] = useState()
   const history = useHistory()
 
-  const login = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(emailRef.current.value, passwordRef.current.value)
-      .then((userCredential) => {
-        setPasswordError('')
-        var user = userCredential.user
-        console.log('the user email after login', user.email)
-        console.log('the user after login', user)
-        emailRef.current.value = ''
-        passwordRef.current.value = ''
-
-        history.push('/profile')
-        // history.push('/dashboard', { email: user.email })
+  const sendResetPasswordLink = () => {
+    var auth = firebase.auth()
+    auth
+      .sendPasswordResetEmail(emailRef.current.value)
+      .then(function () {
+        // Email sent.
+        alert('Email sended')
       })
-      .catch((error) => {
-        setPasswordError('Email or password is incorrect')
-        const errorCode = error.code
-        const errorMessage = error.message
+      .catch(function (error) {
+        console.log('error', error)
+        // An error happened.
       })
   }
 
@@ -51,7 +42,7 @@ const Login = () => {
           <Grid item xs={4}></Grid>
           <Grid item xs={4}>
             <Card style={{ padding: '20px' }}>
-              {passwordError && <Alert severity="error">{passwordError}</Alert>}
+              {emailError && <Alert severity="error">{emailError}</Alert>}
               <form
                 // ref={formRef}
                 className={classes.root}
@@ -64,22 +55,15 @@ const Login = () => {
                   label="Email"
                   type="email"
                 />
-                <TextField
-                  inputRef={passwordRef}
-                  id="standard-basic"
-                  type="password"
-                  label="Password"
-                />
                 <Button
                   variant="contained"
                   color="primary"
                   style={{ width: '42ch' }}
-                  onClick={login}
+                  onClick={sendResetPasswordLink}
                 >
-                  Login
+                  Send Reset Password Link
                 </Button>
               </form>
-              <Link to="/forget-password">Forget Password</Link>
             </Card>
           </Grid>
           <Grid item xs={4}></Grid>
@@ -89,4 +73,4 @@ const Login = () => {
   )
 }
 
-export { Login }
+export { ForgetPassword }

@@ -10,7 +10,7 @@ import {
   useLocation,
   // useParams,
 } from 'react-router-dom'
-import { Profile } from './components/profile'
+// import { Profile } from './components/profile'
 import { About } from './components/About'
 import { GeneralInformation } from './components/generalInformation'
 import { EditGeneralInformation } from './components/editGeneralInformation'
@@ -23,13 +23,16 @@ import { Login } from './authentication/Login'
 import { Register } from './authentication/Register'
 import { Dashboard } from './authentication/dashboard'
 import { RegistrationStep2 } from './authentication/RegistrationStep2'
+import { userProfile } from './authentication/profile'
+import { ForgetPassword } from './authentication/ForgerPassword'
+// import { PrivateRoutes } from './authentication/PrivateRoutes'
 function App() {
   return (
     <div>
       <Router>
         <Header />
         <Switch>
-          <Route path="/profile" exact component={Profile} />
+          {/* <Route path="/profile" exact component={Profile} /> */}
           <Route path="/about" exact component={About} />
           <Route path="/add" exact component={GeneralInformation} />
           <Route path="/edit" exact component={EditGeneralInformation} />
@@ -41,7 +44,9 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/register-step-2" exact component={RegistrationStep2} />
+          <Route path="/profile" exact component={userProfile} />
           <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/forget-password" exact component={ForgetPassword} />
         </Switch>
       </Router>
     </div>

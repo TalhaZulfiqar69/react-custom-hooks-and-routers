@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import { useLocation } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Card, Grid, TextField, Button } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 const RegistrationStep2 = () => {
   const classes = useStyles()
   const location = useLocation()
+  const history = useHistory()
   const [error, setError] = useState()
   const mobileNumberRef = useRef()
   const qualificationRef = useRef()
@@ -55,11 +56,14 @@ const RegistrationStep2 = () => {
         .then(function (docRef) {
           // console.log('Document written with ID: ', docRef.id)
           // console.log('Document written: ', docRef)
+          const userData = docRef
           mobileNumberRef.current.value = ''
           qualificationRef.current.value = ''
           designationRef.current.value = ''
           companyRef.current.value = ''
           addressRef.current.value = ''
+          history.push('/profile')
+          // history.push('/register-step-2', { userId: user.uid })
         })
         .catch(function (e) {
           setError(e)
