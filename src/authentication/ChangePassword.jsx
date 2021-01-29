@@ -49,6 +49,9 @@ const ChangePassword = () => {
         var user = firebase.auth().currentUser
         if (passwordRef.current.value != confirmPasswordRef.current.value) {
           setPasswordError('password and confirm password not matched')
+          setTimeout(() => {
+            setPasswordError('')
+          }, 5000)
         } else {
           setPasswordError('')
           user
@@ -56,6 +59,9 @@ const ChangePassword = () => {
             .then(() => {
               // Update successful.
               setPasswordSuccess('password changed succesfully')
+              setTimeout(() => {
+                setPasswordSuccess('')
+              }, 5000)
             })
             .catch(function (error) {
               // An error happened.
@@ -65,6 +71,9 @@ const ChangePassword = () => {
       })
       .catch((error) => {
         setPasswordError('Old password is incorrect')
+        setTimeout(() => {
+          setPasswordError('')
+        }, 5000)
       })
   }
   return (
