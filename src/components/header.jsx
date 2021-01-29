@@ -50,6 +50,10 @@ const Header = () => {
             <Link to="/register" style={style}>
               Register
             </Link>
+            &nbsp;&nbsp;&nbsp;
+            <Link to="/change-password" style={style}>
+              Change Password
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>

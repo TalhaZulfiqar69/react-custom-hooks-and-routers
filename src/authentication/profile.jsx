@@ -28,6 +28,8 @@ const userProfile = () => {
   if (!currentUser) {
     return <Redirect to="/login" />
   }
+
+  console.log('ahahahaha current user', currentUser)
   const classes = useStyles()
   const location = useLocation()
   const history = useHistory()

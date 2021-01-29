@@ -25,11 +25,10 @@ import { Dashboard } from './authentication/dashboard'
 import { RegistrationStep2 } from './authentication/RegistrationStep2'
 import { userProfile } from './authentication/profile'
 import { ForgetPassword } from './authentication/ForgerPassword'
+import { ChangePassword } from './authentication/ChangePassword'
 // import { PrivateRoutes } from './authentication/PrivateRoutes'
-import { AuthProvider } from './authentication/PrivateRoutes'
+import { AuthProvider, AuthContext } from './authentication/PrivateRoutes'
 import { UploadFile } from './components/UploadFile'
-
-import { AuthContext } from './authentication/PrivateRoutes'
 import { firebase } from './util/firebase'
 function App() {
   const currentUser = useContext(AuthContext)
@@ -39,11 +38,14 @@ function App() {
   //   return <Redirect to="/login" />
   // }
   // alert(currentUser)
+  console.log('firebase.auth()', firebase.auth().currentUser)
+  console.log('huhuhuuhuhu currentUser', currentUser)
   return (
     <div>
       <AuthProvider>
         <Router>
-          {currentUser === 'undefined' ? <Header /> : ''}
+          {/* {currentUser === 'undefined' ? <Header /> : ''} */}
+          <Header />
           <Switch>
             {/* <Route path="/profile" exact component={Profile} /> */}
             <Route path="/about" exact component={About} />
@@ -60,6 +62,7 @@ function App() {
             <Route path="/profile" exact component={userProfile} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/forget-password" exact component={ForgetPassword} />
+            <Route path="/change-password" exact component={ChangePassword} />
             <Route path="/file-upload" exact component={UploadFile} />
           </Switch>
         </Router>
