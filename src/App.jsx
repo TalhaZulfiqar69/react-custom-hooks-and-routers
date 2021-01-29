@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Header } from './components/header'
 import {
   BrowserRouter as Router,
@@ -27,13 +27,23 @@ import { userProfile } from './authentication/profile'
 import { ForgetPassword } from './authentication/ForgerPassword'
 // import { PrivateRoutes } from './authentication/PrivateRoutes'
 import { AuthProvider } from './authentication/PrivateRoutes'
+import { UploadFile } from './components/UploadFile'
 
+import { AuthContext } from './authentication/PrivateRoutes'
+import { firebase } from './util/firebase'
 function App() {
+  const currentUser = useContext(AuthContext)
+
+  // console.log('currentUser', currentUser)
+  // if (!currentUser) {
+  //   return <Redirect to="/login" />
+  // }
+  // alert(currentUser)
   return (
     <div>
       <AuthProvider>
         <Router>
-          <Header />
+          {currentUser === 'undefined' ? <Header /> : ''}
           <Switch>
             {/* <Route path="/profile" exact component={Profile} /> */}
             <Route path="/about" exact component={About} />
@@ -50,6 +60,7 @@ function App() {
             <Route path="/profile" exact component={userProfile} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/forget-password" exact component={ForgetPassword} />
+            <Route path="/file-upload" exact component={UploadFile} />
           </Switch>
         </Router>
       </AuthProvider>

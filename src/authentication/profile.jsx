@@ -36,20 +36,22 @@ const userProfile = () => {
   useEffect(() => {
     var loginedUser = firebase.auth().currentUser
 
-    db.collection('userDetails')
-      .where('userId', '==', loginedUser.uid)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          const dataItems = []
-          const myData = doc.data()
-          dataItems.push(myData)
-          setData(dataItems)
+    if (loginedUser) {
+      db.collection('userDetails')
+        .where('userId', '==', loginedUser.uid)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            const dataItems = []
+            const myData = doc.data()
+            dataItems.push(myData)
+            setData(dataItems)
+          })
         })
-      })
-      .catch(function (error) {
-        console.log('Error getting documents: ', error)
-      })
+        .catch(function (error) {
+          console.log('Error getting documents: ', error)
+        })
+    }
   }, [])
 
   const logoutUser = () => {
@@ -76,6 +78,9 @@ const userProfile = () => {
                 data.map((d) => (
                   // eslint-disable-next-line react/jsx-key
                   <p>
+                    <img src={d.profilePicture} alt="" />
+                    <br />
+                    <br />
                     {d.address} <br />
                     <br /> {d.company}
                     <br />

@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react'
 
 import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
-import { Container, Card, Grid, TextField, Button } from '@material-ui/core'
+import { Container, Card, Grid, TextField, Button, Avatar } from '@material-ui/core'
+import { deepPurple, deepOrange } from '@material-ui/core/colors'
 import { Alert } from '@material-ui/lab'
 
 import { firebase, db } from '../util/firebase'
@@ -17,6 +18,20 @@ const useStyles = makeStyles((theme) => ({
   top: {
     marginTop: 100,
   },
+  imgRoot: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(2),
+      position: 'relative',
+      height: 130,
+      width: 130,
+      marginLeft: 100,
+    },
+  },
+  orange: {
+    color: theme.palette.getContrastText(deepOrange[500]),
+    backgroundColor: deepOrange[500],
+  },
 }))
 
 const RegistrationStep2 = () => {
@@ -29,6 +44,7 @@ const RegistrationStep2 = () => {
   const designationRef = useRef()
   const companyRef = useRef()
   const addressRef = useRef()
+  const [imgUrl, setImgUrl] = useState()
 
   const saveUserInformation = () => {
     if (mobileNumberRef.current.value.length <= 0) {
@@ -51,6 +67,7 @@ const RegistrationStep2 = () => {
           designation: designationRef.current.value,
           company: companyRef.current.value,
           address: addressRef.current.value,
+          profilePicture: imgUrl,
           userId: location.state.userId,
         })
         .then(function (docRef) {
@@ -71,6 +88,17 @@ const RegistrationStep2 = () => {
     }
   }
 
+  const uploadImage = async (e) => {
+    // console.log('bawa g sialkot', e.target.files[0])
+    const file = e.target.files[0]
+    const fRef = firebase.storage().ref()
+    const fileRef = fRef.child(file.name)
+    await fileRef.put(file)
+    const fileUrl = await fileRef.getDownloadURL()
+    console.log('my fileUrl', fileUrl)
+    setImgUrl(fileUrl)
+  }
+
   return (
     <div className={classes.top}>
       <Container size="sm">
@@ -80,6 +108,22 @@ const RegistrationStep2 = () => {
             <Card style={{ padding: '20px' }}>
               {error && <Alert severity="error">{error}</Alert>}
               <form className={classes.root} noValidate autoComplete="off">
+                <div className={classes.imgRoot}>
+                  <Avatar
+                    type="file"
+                    className={classes.orange}
+                    src={imgUrl}
+                  ></Avatar>
+                </div>
+
+                {!imgUrl && (
+                  <TextField
+                    id="standard-basic"
+                    label="Upload Image"
+                    type="file"
+                    onChange={uploadImage}
+                  />
+                )}
                 <TextField
                   inputRef={mobileNumberRef}
                   id="standard-basic"
