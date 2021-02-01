@@ -59,6 +59,9 @@ const ChangePassword = () => {
             .then(() => {
               // Update successful.
               setPasswordSuccess('password changed succesfully')
+              oldPasswordRef.current.value = ''
+              passwordRef.current.value = ''
+              confirmPasswordRef.current.value = ''
               setTimeout(() => {
                 setPasswordSuccess('')
               }, 5000)

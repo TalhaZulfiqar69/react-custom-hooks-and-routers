@@ -21,9 +21,18 @@ const ForgetPassword = () => {
   const [emailError, setEmailError] = useState()
   const [emailInfo, setEmailInfo] = useState()
   const sendResetPasswordLink = () => {
+    var actionCodeSettings = {
+      url: 'http://localhost:3000?email=' + emailRef.current.value,
+      handleCodeInApp: true,
+      // When multiple custom dynamic link domains are defined, specify which
+      // one to use.
+      dynamicLinkDomain: 'http://localhost:3000',
+    }
+
     var auth = firebase.auth()
     auth
-      .sendPasswordResetEmail(emailRef.current.value)
+      .sendPasswordResetEmail(emailRef.current.value, actionCodeSettings)
+      // .sendPasswordResetEmail(emailRef.current.value)
       .then(function () {
         // Email sent.
         setEmailError('')
