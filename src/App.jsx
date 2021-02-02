@@ -3,7 +3,8 @@ import './App.css'
 import React, { useContext } from 'react'
 import { Header } from './components/header'
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link,
@@ -19,8 +20,9 @@ import { ReactTableExample } from './components/reactTableExample'
 import { EditUser } from './components/editUser'
 // import { Login } from './components/auth/login'
 // import { Register } from './components/auth/register'
-import { Login } from './authentication/Login'
-import { Register } from './authentication/Register'
+import { LoginTypeScript } from './authentication/LoginTypeScript'
+import { Register } from './authentication/RegisterTypeScript'
+// import { Register } from './authentication/Register'
 import { Dashboard } from './authentication/dashboard'
 import { RegistrationStep2 } from './authentication/RegistrationStep2'
 import { userProfile } from './authentication/profile'
@@ -56,7 +58,7 @@ function App() {
             <Route path="/edit-user" exact component={EditUser} />
             {/* <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} /> */}
-            <Route path="/login" exact component={Login} />
+            <Route path="/login" exact component={LoginTypeScript} />
             <Route path="/register" exact component={Register} />
             <Route path="/register-step-2" exact component={RegistrationStep2} />
             <Route path="/profile" exact component={userProfile} />
