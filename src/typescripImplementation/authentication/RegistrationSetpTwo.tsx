@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 
 const RegistrationSetpTwo: React.FC = () => {
     const classes = useStyles()
-    const location = useLocation()
     const history = useHistory()
     const [error, setError] = useState<string>('')
     const [mobileNumber, setMobileNumber] = useState<string>('')
@@ -97,7 +96,6 @@ const RegistrationSetpTwo: React.FC = () => {
                                     <Avatar type="file" className={classes.orange} src={imgUrl}></Avatar>
                                 </div>
 
-                                <h1>Hello world of second Step</h1>
                                 {!imgUrl && (
                                     <TextField
                                         id="standard-basic"
@@ -137,7 +135,7 @@ const RegistrationSetpTwo: React.FC = () => {
                                     label="Address"
                                 />
                                 <Button
-                                    variant="contained"
+                                    variant="outlined"
                                     color="primary"
                                     style={{ width: '42ch' }}
                                     onClick={saveUserInformation}

@@ -24,6 +24,10 @@ interface USER_ADDITIONAL_INFORMATION {
     UID: any
 }
 
+interface USER_ID {
+    userId: any
+}
+
 const REGISTER_USER = async (register: USER_CREDENTIALS) => {
     try {
         await firebase.auth().createUserWithEmailAndPassword(register.email, register.password)
@@ -72,10 +76,19 @@ const RESET_PASSWORD = async (resetPassword: USER_RESET_PASSWORD) => {
     }
 }
 
+const GET_USER_INFORMATION = async (userInformation: USER_ID) => {
+    try {
+        return await db.collection('userDetails').where('userId', '==', userInformation.userId).get()
+    } catch (error) {
+        return error.message
+    }
+}
+
 export {
     REGISTER_USER,
     REGISTER_USER_SECOND_STEP,
     LOGIN_USER,
     FORGET_PASSWORD,
-    RESET_PASSWORD
+    RESET_PASSWORD,
+    GET_USER_INFORMATION
 }

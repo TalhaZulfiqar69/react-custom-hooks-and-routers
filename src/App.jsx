@@ -40,6 +40,7 @@ import { Login } from './typescripImplementation/authentication/Login'
 import { ForgetPassword } from './typescripImplementation/authentication/ForgetPassword'
 import { ResetPassword } from './typescripImplementation/authentication/ResetPassword'
 import { RegistrationSetpTwo } from './typescripImplementation/authentication/RegistrationSetpTwo'
+import { Profile } from './typescripImplementation/authentication/Profile'
 function App() {
     const currentUser = useContext(AuthContext)
 
@@ -62,12 +63,13 @@ function App() {
                         <Route path="/login" exact component={Login} />
                         <Route path="/register" exact component={Registration} />
                         <Route path="/register-step-two" exact component={RegistrationSetpTwo} />
-                        <Route path="/profile" exact component={userProfile} />
+                        {/* <Route path="/profile" exact component={userProfile} /> */}
                         <Route path="/dashboard" exact component={Dashboard} />
                         <Route path="/forget-password" exact component={ForgetPassword} />
                         <Route path="/change-password" exact component={ChangePassword} />
                         <Route path="/file-upload" exact component={UploadFile} />
                         <Route path="/reset-password" exact component={ResetPassword} />
+                        <Route path="/profile" exact component={Profile} />
                     </Switch>
                 </Router>
             </AuthProvider>
