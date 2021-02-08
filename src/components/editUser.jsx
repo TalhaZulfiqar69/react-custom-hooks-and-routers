@@ -29,8 +29,6 @@ const EditUser = (props) => {
   const generalInformation = localStorage.getItem('generalInfo')
   const gI = JSON.parse(generalInformation)
 
-  console.log('information', location.state.rows.name)
-
   useEffect(() => {
     setName(location.state.rows.name)
     setDesignation(location.state.rows.designation)

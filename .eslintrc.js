@@ -11,12 +11,15 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
+      tsx: true,
       modules: true,
       experimentalObjectRestSpread: true,
     },
   },
   rules: {
-    'no-console': 'warn',
+    'no-console': 'off',
+    'react/no-children-prop': 'off',
+    'react/no-find-dom-node':'off',
     'no-eval': 'error',
     'react/prop-types': ['off'],
   },

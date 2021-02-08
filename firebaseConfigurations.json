@@ -1,0 +1,12 @@
+{
+    "app": {
+        "name": "training-project"
+      },
+      "someservice": {
+        "id": "1:146902802271:web:9bf5a24572b7e721e7e0ea",
+        "key": "AIzaSyC6ZVgvvauakAOmd54NmhHhnjon2uUAGzE"
+      },
+     "domain": {
+        "host": "http://localhost:3000"
+    }
+}

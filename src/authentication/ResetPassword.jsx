@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert'
 import { makeStyles } from '@material-ui/core/styles'
 import { firebase } from '../util/firebase'
 import { useHistory, Link, Redirect } from 'react-router-dom'
-import { AuthContext } from './PrivateRoutes'
+// import { AuthContext } from './PrivateRoutes'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,68 +15,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const ChangePassword = () => {
-  const { currentUser } = useContext(AuthContext)
-  if (!currentUser) {
-    return <Redirect to="/login" />
-  }
-
+const ResetPassword = () => {
   const classes = useStyles()
   const style = { marginTop: '100px' }
 
-  const oldPasswordRef = useRef()
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
   const [passwordError, setPasswordError] = useState()
   const [passwordSuccess, setPasswordSuccess] = useState()
   const history = useHistory()
 
-  const reauthenticate = (oldPass) => {
-    const user = firebase.auth().currentUser
-    const credentials = firebase.auth.EmailAuthProvider.credential(
-      user.email,
-      oldPasswordRef.current.value
-    )
-
-    return user.reauthenticateWithCredential(credentials)
-  }
-
-  const resetPassword = () => {
-    reauthenticate(oldPasswordRef.current.value)
-      .then(() => {
-        setPasswordError('')
-        var user = firebase.auth().currentUser
-        if (passwordRef.current.value != confirmPasswordRef.current.value) {
-          setPasswordError('password and confirm password not matched')
+  const setNewPassword = async () => {
+    try {
+      if(passwordRef.current.value !=
+        confirmPasswordRef.current.value) {
+          setPasswordError("Password and confirm password not matched")
+        } {
+          var url_string = window.location.search;
+          const urlParams = new URLSearchParams(url_string);
+          const oobCode = urlParams.get('oobCode');
+    
+          await firebase.auth().confirmPasswordReset(oobCode, passwordRef.current.value)
+          setPasswordError("")
+          setPasswordSuccess("Password updated successfully")
           setTimeout(() => {
-            setPasswordError('')
+              history.push('/login')
           }, 5000)
-        } else {
-          setPasswordError('')
-          user
-            .updatePassword(passwordRef.current.value)
-            .then(() => {
-              // Update successful.
-              setPasswordSuccess('password changed succesfully')
-              oldPasswordRef.current.value = ''
-              passwordRef.current.value = ''
-              confirmPasswordRef.current.value = ''
-              setTimeout(() => {
-                setPasswordSuccess('')
-              }, 5000)
-            })
-            .catch(function (error) {
-              // An error happened.
-              
-            })
         }
-      })
-      .catch((error) => {
-        setPasswordError('Old password is incorrect')
-        setTimeout(() => {
-          setPasswordError('')
-        }, 5000)
-      })
+      
+    } catch (error) {
+    }
+    
   }
   return (
     <div style={style}>
@@ -90,12 +59,7 @@ const ChangePassword = () => {
                 <Alert severity="success">{passwordSuccess}</Alert>
               )}
               <form className={classes.root} noValidate autoComplete="off">
-                <TextField
-                  inputRef={oldPasswordRef}
-                  id="standard-basic"
-                  label="Old Password"
-                  type="password"
-                />
+              
                 <TextField
                   inputRef={passwordRef}
                   id="standard-basic"
@@ -112,9 +76,9 @@ const ChangePassword = () => {
                   variant="contained"
                   color="primary"
                   style={{ width: '42ch' }}
-                  onClick={resetPassword}
+                  onClick={setNewPassword}
                 >
-                  Update Password
+                  Change Password
                 </Button>
               </form>
             </Card>
@@ -125,4 +89,4 @@ const ChangePassword = () => {
     </div>
   )
 }
-export { ChangePassword }
+export { ResetPassword }

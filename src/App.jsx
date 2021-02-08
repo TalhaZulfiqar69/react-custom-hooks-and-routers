@@ -3,8 +3,8 @@ import './App.css'
 import React, { useContext } from 'react'
 import { Header } from './components/header'
 import {
-  // BrowserRouter as Router,
-  HashRouter as Router,
+  BrowserRouter as Router,
+  // HashRouter as Router,
   Switch,
   Route,
   Link,
@@ -26,22 +26,22 @@ import { Register } from './authentication/RegisterTypeScript'
 import { Dashboard } from './authentication/dashboard'
 import { RegistrationStep2 } from './authentication/RegistrationStep2'
 import { userProfile } from './authentication/profile'
-import { ForgetPassword } from './authentication/ForgerPassword'
+// import { ForgetPassword } from './authentication/ForgerPassword'
 import { ChangePassword } from './authentication/ChangePassword'
+// import { ResetPassword } from './authentication/ResetPassword'
 // import { PrivateRoutes } from './authentication/PrivateRoutes'
 import { AuthProvider, AuthContext } from './authentication/PrivateRoutes'
 import { UploadFile } from './components/UploadFile'
 import { firebase } from './util/firebase'
+
+// Typescript stuff
+import {Registration} from './typescripImplementation/authentication/Registration'
+import {Login} from './typescripImplementation/authentication/Login'
+import {ForgetPassword} from './typescripImplementation/authentication/ForgetPassword'
+import {ResetPassword} from './typescripImplementation/authentication/ResetPassword'
 function App() {
   const currentUser = useContext(AuthContext)
 
-  // console.log('currentUser', currentUser)
-  // if (!currentUser) {
-  //   return <Redirect to="/login" />
-  // }
-  // alert(currentUser)
-  console.log('firebase.auth()', firebase.auth().currentUser)
-  console.log('huhuhuuhuhu currentUser', currentUser)
   return (
     <div>
       <AuthProvider>
@@ -58,14 +58,15 @@ function App() {
             <Route path="/edit-user" exact component={EditUser} />
             {/* <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} /> */}
-            <Route path="/login" exact component={LoginTypeScript} />
-            <Route path="/register" exact component={Register} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Registration} />
             <Route path="/register-step-2" exact component={RegistrationStep2} />
             <Route path="/profile" exact component={userProfile} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/forget-password" exact component={ForgetPassword} />
             <Route path="/change-password" exact component={ChangePassword} />
             <Route path="/file-upload" exact component={UploadFile} />
+            <Route path="/reset-password" exact component={ResetPassword} />
           </Switch>
         </Router>
       </AuthProvider>

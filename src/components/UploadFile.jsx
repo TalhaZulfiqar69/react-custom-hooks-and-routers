@@ -40,13 +40,11 @@ const UploadFile = () => {
   //   }
 
   const uploadImage = async (e) => {
-    // console.log('bawa g sialkot', e.target.files[0])
     const file = e.target.files[0]
     const fRef = firebase.storage().ref()
     const fileRef = fRef.child(file.name)
     await fileRef.put(file)
     const fileUrl = await fileRef.getDownloadURL()
-    console.log('my fileUrl', fileUrl)
     setImageUrl(fileUrl)
   }
   return (

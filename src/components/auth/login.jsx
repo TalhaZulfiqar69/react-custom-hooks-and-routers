@@ -16,9 +16,6 @@ const Login = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const login = () => {
-    console.log('emailRef', emailRef.current.value)
-    console.log('passwordRef', passwordRef.current.value)
-
     firebase.database.ref('users').orderByKey().limitToLast(100)
     firebase.database.ref('users').push(emailRef.current.value)
     firebase.database.ref('users').push(passwordRef.current.value)

@@ -22,20 +22,20 @@ const Dashboard = () => {
   //       const users = []
   //       snapshot.forEach((docs) => {
   //         const data = docs.data()
-  //         console.log('data', data)
+  
   //         users.push(data)
   //       })
   //       setAllUsers(users)
-  //       console.log('users in function', users)
+  
   //     })
   //     .catch((error) => {
-  //       console.log(error)
+  
   //     })
   // }
 
   useEffect(() => {
     // if (allUsers.length > 0) return
-    // console.log('getAllUsers()')
+    
     // getAllUsers()
   }, [])
 
@@ -88,10 +88,9 @@ const Dashboard = () => {
   } = useTable({ columns, data })
 
   const addNewUser = () => {
-    console.log('New use is going to be add')
+    
   }
 
-  // console.log('allUsers here', allUsers)
   return (
     <Container size="sm">
       <div style={style}>

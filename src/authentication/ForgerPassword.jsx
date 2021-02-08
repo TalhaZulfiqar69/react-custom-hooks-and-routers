@@ -4,7 +4,7 @@ import Alert from '@material-ui/lab/Alert'
 import { makeStyles } from '@material-ui/core/styles'
 import { firebase } from '../util/firebase'
 import { useHistory, Link } from 'react-router-dom'
-
+import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
@@ -20,26 +20,18 @@ const ForgetPassword = () => {
   const emailRef = useRef()
   const [emailError, setEmailError] = useState()
   const [emailInfo, setEmailInfo] = useState()
+  
   const sendResetPasswordLink = () => {
-    var actionCodeSettings = {
-      url: 'http://localhost:3000?email=' + emailRef.current.value,
-      handleCodeInApp: true,
-      // When multiple custom dynamic link domains are defined, specify which
-      // one to use.
-      dynamicLinkDomain: 'http://localhost:3000',
-    }
-
     var auth = firebase.auth()
     auth
-      .sendPasswordResetEmail(emailRef.current.value, actionCodeSettings)
-      // .sendPasswordResetEmail(emailRef.current.value)
-      .then(function () {
-        // Email sent.
+      .sendPasswordResetEmail(emailRef.current.value)
+      .then((res) => {
+
         setEmailError('')
         setEmailInfo('Email sended. Please check you mail box')
       })
       .catch(function (error) {
-        // console.log('error', error)
+        
         setEmailInfo('')
         setEmailError('User with this email is not existed')
         // An error happened.

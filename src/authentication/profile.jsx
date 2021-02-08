@@ -29,7 +29,6 @@ const userProfile = () => {
     return <Redirect to="/login" />
   }
 
-  console.log('ahahahaha current user', currentUser)
   const classes = useStyles()
   const location = useLocation()
   const history = useHistory()
@@ -51,7 +50,7 @@ const userProfile = () => {
           })
         })
         .catch(function (error) {
-          console.log('Error getting documents: ', error)
+          
         })
     }
   }, [])

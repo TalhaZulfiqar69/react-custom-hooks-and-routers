@@ -12,4 +12,15 @@ let firebaseConfig = firebase.initializeApp({
 
 const db = firebaseConfig.firestore()
 
+// export const auth = firebase.auth()
+// export const funcs = firebase.functions()
+// export const firesotre = firebase.firestore()
+// // export const storage = firebase.storage()
+
+// if(window.location.host.link('localhost')) {
+//   auth.useEmulator('http://localhost:9099');
+//   firesotre.useEmulator('localhost', 5002);
+//   // storage.useEmulator('localhost', 9000);
+//   funcs.useEmulator('localhost', 5001);
+// }
 export { firebase, db, firebaseConfig }

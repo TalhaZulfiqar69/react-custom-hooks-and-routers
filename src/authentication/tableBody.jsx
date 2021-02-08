@@ -39,8 +39,6 @@ const TableBody = () => {
       setMyUsers(usersList)
     })
   }
-
-  // console.log('the usersList ahdsakjd', myUsers)
   useEffect(() => {
     getAllUsers
   }, [])
@@ -86,7 +84,6 @@ const TableBody = () => {
   } = useTable({ columns, data })
 
   const addNewUser = () => {
-    console.log('New use is going to be add')
   }
   return (
     <Container size="sm">

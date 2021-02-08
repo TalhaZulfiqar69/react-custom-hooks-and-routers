@@ -22,9 +22,6 @@ const ReactSelect = () => {
   }
 
   const changeDefaultValue = () => {
-    console.log('selectRef.current', selectRef.current.props.defaultValue)
-    console.log('the default value', options[2])
-
     selectRef.current.props.defaultValue = options[2]
   }
 
