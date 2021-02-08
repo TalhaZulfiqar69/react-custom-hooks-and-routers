@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Container, Card, Grid, TextField, Button, Avatar } from '@material-ui/core'
 import { deepPurple, deepOrange } from '@material-ui/core/colors'
 import { Alert } from '@material-ui/lab'
-
-import { firebase, db } from '../util/firebase'
+import { REGISTER_USER_SECOND_STEP } from './authentication_api'
+import { firebase, db } from '../../util/firebase'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,55 +34,43 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const RegistrationStep2 = () => {
+const RegistrationSetpTwo: React.FC = () => {
     const classes = useStyles()
     const location = useLocation()
     const history = useHistory()
-    const [error, setError] = useState()
-    const mobileNumberRef = useRef()
-    const qualificationRef = useRef()
-    const designationRef = useRef()
-    const companyRef = useRef()
-    const addressRef = useRef()
-    const [imgUrl, setImgUrl] = useState()
+    const [error, setError] = useState<string>('')
+    const [mobileNumber, setMobileNumber] = useState<string>('')
+    const [qualification, setQualification] = useState<string>('')
+    const [designation, setDesignation] = useState<string>('')
+    const [company, setCompany] = useState<string>('')
+    const [address, setAddress] = useState<string>('')
+    const [imgUrl, setImgUrl] = useState<string>('')
 
-    const saveUserInformation = () => {
-        if (mobileNumberRef.current.value.length <= 0) {
+    const saveUserInformation = async () => {
+        if (mobileNumber.length <= 0) {
             setError('mobileNumber is requried')
-        } else if (qualificationRef.current.value.length <= 0) {
+        } else if (qualification.length <= 0) {
             setError('qualification is requried')
-        } else if (designationRef.current.value.length <= 0) {
+        } else if (designation.length <= 0) {
             setError('designation is requried')
-        } else if (companyRef.current.value.length <= 0) {
+        } else if (company.length <= 0) {
             setError('company is requried')
-        } else if (addressRef.current.value.length <= 0) {
+        } else if (address.length <= 0) {
             setError('address is requried')
         } else {
             setError('')
-
-            db.collection('userDetails')
-                .add({
-                    mobileNumber: mobileNumberRef.current.value,
-                    qualification: qualificationRef.current.value,
-                    designation: designationRef.current.value,
-                    company: companyRef.current.value,
-                    address: addressRef.current.value,
-                    profilePicture: imgUrl,
-                    userId: location.state.userId,
-                })
-                .then(function (docRef) {
-                    const userData = docRef
-                    mobileNumberRef.current.value = ''
-                    qualificationRef.current.value = ''
-                    designationRef.current.value = ''
-                    companyRef.current.value = ''
-                    addressRef.current.value = ''
-                    history.push('/profile')
-                    // history.push('/register-step-2', { userId: user.uid })
-                })
-                .catch(function (e) {
-                    setError(e)
-                })
+            const user = firebase.auth().currentUser
+            const UID = user?.uid
+            const res = await REGISTER_USER_SECOND_STEP({
+                mobileNumber,
+                qualification,
+                designation,
+                company,
+                address,
+                imgUrl,
+                UID,
+            })
+            history.push('/profile')
         }
     }
 
@@ -109,6 +97,7 @@ const RegistrationStep2 = () => {
                                     <Avatar type="file" className={classes.orange} src={imgUrl}></Avatar>
                                 </div>
 
+                                <h1>Hello world of second Step</h1>
                                 {!imgUrl && (
                                     <TextField
                                         id="standard-basic"
@@ -118,25 +107,35 @@ const RegistrationStep2 = () => {
                                     />
                                 )}
                                 <TextField
-                                    inputRef={mobileNumberRef}
+                                    onChange={(e) => setMobileNumber(e.target.value)}
                                     id="standard-basic"
                                     label="Mobile No"
                                     type="number"
                                 />
                                 <TextField
-                                    inputRef={qualificationRef}
+                                    onChange={(e) => setQualification(e.target.value)}
                                     id="standard-basic"
                                     type="text"
                                     label="Qualification"
                                 />
                                 <TextField
-                                    inputRef={designationRef}
+                                    onChange={(e) => setDesignation(e.target.value)}
                                     id="standard-basic"
                                     type="text"
                                     label="Designation"
                                 />
-                                <TextField inputRef={companyRef} id="standard-basic" type="text" label="Company" />
-                                <TextField inputRef={addressRef} id="standard-basic" type="text" label="Address" />
+                                <TextField
+                                    onChange={(e) => setCompany(e.target.value)}
+                                    id="standard-basic"
+                                    type="text"
+                                    label="Company"
+                                />
+                                <TextField
+                                    onChange={(e) => setAddress(e.target.value)}
+                                    id="standard-basic"
+                                    type="text"
+                                    label="Address"
+                                />
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -154,5 +153,4 @@ const RegistrationStep2 = () => {
         </div>
     )
 }
-
-export { RegistrationStep2 }
+export { RegistrationSetpTwo }

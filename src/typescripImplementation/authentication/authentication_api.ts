@@ -1,4 +1,4 @@
-import { firebase } from '../../util/firebase'
+import { firebase, db } from '../../util/firebase'
 
 interface USER_CREDENTIALS {
     email: string,
@@ -14,9 +14,35 @@ interface USER_RESET_PASSWORD {
     password: string
 }
 
+interface USER_ADDITIONAL_INFORMATION {
+    mobileNumber: string,
+    qualification: string,
+    designation: string,
+    company: string,
+    address: string,
+    imgUrl: string,
+    UID: any
+}
+
 const REGISTER_USER = async (register: USER_CREDENTIALS) => {
     try {
         await firebase.auth().createUserWithEmailAndPassword(register.email, register.password)
+    } catch (error) {
+        return error.message
+    }
+}
+
+const REGISTER_USER_SECOND_STEP = async (userAdditionalInfo: USER_ADDITIONAL_INFORMATION) => {
+    try {
+        await db.collection('userDetails').add({
+            mobileNumber: userAdditionalInfo.mobileNumber,
+            qualification: userAdditionalInfo.qualification,
+            designation: userAdditionalInfo.designation,
+            company: userAdditionalInfo.company,
+            address: userAdditionalInfo.address,
+            profilePicture: userAdditionalInfo.imgUrl,
+            userId: userAdditionalInfo.UID,
+        })
     } catch (error) {
         return error.message
     }
@@ -48,6 +74,7 @@ const RESET_PASSWORD = async (resetPassword: USER_RESET_PASSWORD) => {
 
 export {
     REGISTER_USER,
+    REGISTER_USER_SECOND_STEP,
     LOGIN_USER,
     FORGET_PASSWORD,
     RESET_PASSWORD

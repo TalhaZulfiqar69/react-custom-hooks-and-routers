@@ -1,49 +1,43 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "hosting": {
-    "public": "build",
-    "rewrites": [
-      { "source": "/password-reset/**", "function": "passwordReset" }
-    ],
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  },
-  "storage": {
-    "rules": "storage.rules"
-  },
-  "emulators": {
-    "auth": {
-      "port": 9099
-    },
-    "functions": {
-      "port": 5001
+    "database": {
+        "rules": "database.rules.json"
     },
     "firestore": {
-      "port": 5004
-    },
-    "database": {
-      "port": 9001
+        "rules": "firestore.rules",
+        "indexes": "firestore.indexes.json"
     },
     "hosting": {
-      "port": 5000
+        "public": "build",
+        "rewrites": [{ "source": "/password-reset/**", "function": "passwordReset" }],
+        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
-    "pubsub": {
-      "port": 5005
+    "storage": {
+        "rules": "storage.rules"
     },
-    "ui": {
-      "enabled": true
+    "emulators": {
+        "auth": {
+            "port": 9099
+        },
+        "functions": {
+            "port": 5001
+        },
+        "firestore": {
+            "port": 5004
+        },
+        "database": {
+            "port": 9001
+        },
+        "hosting": {
+            "port": 5000
+        },
+        "pubsub": {
+            "port": 5005
+        },
+        "ui": {
+            "enabled": true
+        }
+    },
+    "remoteconfig": {
+        "template": "remoteconfig.template.json"
     }
-  },
-  "remoteconfig": {
-    "template": "remoteconfig.template.json"
-  }
 }
