@@ -41,6 +41,8 @@ import { ForgetPassword } from './typescripImplementation/authentication/ForgetP
 import { ResetPassword } from './typescripImplementation/authentication/ResetPassword'
 import { RegistrationSetpTwo } from './typescripImplementation/authentication/RegistrationSetpTwo'
 import { Profile } from './typescripImplementation/authentication/Profile'
+// -------------------------
+import { CloudFunctionTask } from './components/CloudFunctionsTask'
 function App() {
     const currentUser = useContext(AuthContext)
 
@@ -70,6 +72,7 @@ function App() {
                         <Route path="/file-upload" exact component={UploadFile} />
                         <Route path="/reset-password" exact component={ResetPassword} />
                         <Route path="/profile" exact component={Profile} />
+                        <Route path="/cloudfunctions" exact component={CloudFunctionTask} />
                     </Switch>
                 </Router>
             </AuthProvider>
