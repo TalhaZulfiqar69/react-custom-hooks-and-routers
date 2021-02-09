@@ -1,27 +1,46 @@
 const functions = require('firebase-functions')
-const firebase = require('firebase-admin')
+const admin = require('firebase-admin')
+const express = require('express')
+const bodyParser = require('body-parser')
 const cors = require('cors')({ origin: true })
 
-// http://localhost:5001/training-project-be1c1/us-central1/helloWorld
+admin.initializeApp(functions.config().firebase)
 
-exports.getFirstAndLastName = functions.https.onRequest((req, res) => {
-    cors(req, res, () => {
-        functions.logger.info('getFirstAndLastName logs!', { structuredData: true })
+const app = express()
+const main = express()
+const db = admin.firestore()
 
-        console.log('req.body', req.body)
-        const { fName, lName } = req.body
-        console.log('fName', fName)
-        console.log('lName', lName)
-        console.log('Full Name', fName + ' ' + lName)
-        res.send('Firebase helloWorld Function')
-        // res.send('Passed.')
-    })
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+
+exports.webApi = functions.https.onRequest(app)
+
+app.get('/first-route', (req, res) => {
+    console.log('req', req)
+    console.log('This is first firebase express route implementation example')
+    res.send('This is first firebase express route implementation example')
 })
 
-// exports.byeWorld = functions.https.onRequest((request, response) => {
-//     functions.logger.info("Bye logs!", {structuredData: true});
-//     response.send("Bye from Firebase!");
-//   });
+app.get('/second-route', (req, res) => {
+    console.log('req', req)
+    console.log('This is second firebase express route implementation example')
+    res.send('This is second firebase express route implementation example')
+})
 
-// difference between express router and
-// cloudfunctuons routers
+app.get('/third-route', (req, res) => {
+    console.log('req', req)
+    console.log('This is third firebase express route implementation example')
+    res.send('This is third firebase express route implementation example')
+})
+
+app.get('/fourth-route', (req, res) => {
+    console.log('req', req)
+    console.log('This is fourth firebase express route implementation example')
+    res.send('This is fourth firebase express route implementation example')
+})
+
+app.get('/fifth-route', (req, res) => {
+    console.log('req', req)
+    console.log('This is fifth firebase express route implementation example')
+    res.send('This is fifth firebase express route implementation example')
+})
