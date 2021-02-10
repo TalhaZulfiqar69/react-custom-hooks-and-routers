@@ -60,36 +60,36 @@ const Profile: React.FC = () => {
 
     return (
         <div className={classes.top}>
-            <Container size="sm">
-                <Grid container spacing={3}>
-                    <Grid item xs={10}>
-                        <Card style={{ padding: '20px' }}>
-                            <Button variant="contained" color="primary" className={classes.bottom} onClick={logoutUser}>
-                                Logout
-                            </Button>
-                            <h5>Welcome BAWA G:</h5>
-                            <h6>{firebase.auth().currentUser.email}</h6>
-                            {data &&
-                                data.map((d) => (
-                                    // eslint-disable-next-line react/jsx-key
-                                    <p>
-                                        <img src={d.profilePicture} alt="" />
-                                        <br />
-                                        <br />
-                                        {d.address} <br />
-                                        <br /> {d.company}
-                                        <br />
-                                        <br /> {d.designation}
-                                        <br />
-                                        <br /> {d.qualification}
-                                        <br />
-                                        <br /> {d.mobileNumber}
-                                    </p>
-                                ))}
-                        </Card>
-                    </Grid>
+            {/* <Container size="sm"> */}
+            <Grid container spacing={3}>
+                <Grid item xs={10}>
+                    <Card style={{ padding: '20px' }}>
+                        <Button variant="contained" color="primary" className={classes.bottom} onClick={logoutUser}>
+                            Logout
+                        </Button>
+                        <h5>Welcome BAWA G:</h5>
+                        {/* <h6>{firebase.auth().currentUser.email}</h6> */}
+                        {data &&
+                            data.map((d: any) => (
+                                // eslint-disable-next-line react/jsx-key
+                                <p>
+                                    <img src={d.profilePicture} alt="" />
+                                    <br />
+                                    <br />
+                                    {d.address} <br />
+                                    <br /> {d.company}
+                                    <br />
+                                    <br /> {d.designation}
+                                    <br />
+                                    <br /> {d.qualification}
+                                    <br />
+                                    <br /> {d.mobileNumber}
+                                </p>
+                            ))}
+                    </Card>
                 </Grid>
-            </Container>
+            </Grid>
+            {/* </Container> */}
         </div>
     )
 }

@@ -43,39 +43,46 @@ import { RegistrationSetpTwo } from './typescripImplementation/authentication/Re
 import { Profile } from './typescripImplementation/authentication/Profile'
 // -------------------------
 import { CloudFunctionTask } from './components/CloudFunctionsTask'
+import Example from './redux/Sample'
+
+import { Provider } from 'react-redux'
+import store from './redux/store/index'
 function App() {
     const currentUser = useContext(AuthContext)
 
     return (
         <div>
-            <AuthProvider>
-                <Router>
-                    {/* {currentUser === 'undefined' ? <Header /> : ''} */}
-                    <Header />
-                    <Switch>
-                        {/* <Route path="/profile" exact component={Profile} /> */}
-                        <Route path="/about" exact component={About} />
-                        <Route path="/add" exact component={GeneralInformation} />
-                        <Route path="/edit" exact component={EditGeneralInformation} />
-                        <Route path="/react-select" exact component={ReactSelect} />
-                        <Route path="/react-table" exact component={ReactTableExample} />
-                        <Route path="/edit-user" exact component={EditUser} />
-                        {/* <Route path="/login" exact component={Login} />
+            <Provider store={store}>
+                <AuthProvider>
+                    <Router>
+                        {/* {currentUser === 'undefined' ? <Header /> : ''} */}
+                        <Header />
+                        <Switch>
+                            {/* <Route path="/profile" exact component={Profile} /> */}
+                            <Route path="/about" exact component={About} />
+                            <Route path="/add" exact component={GeneralInformation} />
+                            <Route path="/edit" exact component={EditGeneralInformation} />
+                            <Route path="/react-select" exact component={ReactSelect} />
+                            <Route path="/react-table" exact component={ReactTableExample} />
+                            <Route path="/edit-user" exact component={EditUser} />
+                            {/* <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} /> */}
-                        <Route path="/login" exact component={Login} />
-                        <Route path="/register" exact component={Registration} />
-                        <Route path="/register-step-two" exact component={RegistrationSetpTwo} />
-                        {/* <Route path="/profile" exact component={userProfile} /> */}
-                        <Route path="/dashboard" exact component={Dashboard} />
-                        <Route path="/forget-password" exact component={ForgetPassword} />
-                        <Route path="/change-password" exact component={ChangePassword} />
-                        <Route path="/file-upload" exact component={UploadFile} />
-                        <Route path="/reset-password" exact component={ResetPassword} />
-                        <Route path="/profile" exact component={Profile} />
-                        <Route path="/cloudfunctions" exact component={CloudFunctionTask} />
-                    </Switch>
-                </Router>
-            </AuthProvider>
+                            <Route path="/login" exact component={Login} />
+                            <Route path="/register" exact component={Registration} />
+                            <Route path="/register-step-two" exact component={RegistrationSetpTwo} />
+                            {/* <Route path="/profile" exact component={userProfile} /> */}
+                            <Route path="/dashboard" exact component={Dashboard} />
+                            <Route path="/forget-password" exact component={ForgetPassword} />
+                            <Route path="/change-password" exact component={ChangePassword} />
+                            <Route path="/file-upload" exact component={UploadFile} />
+                            <Route path="/reset-password" exact component={ResetPassword} />
+                            <Route path="/profile" exact component={Profile} />
+                            <Route path="/cloudfunctions" exact component={CloudFunctionTask} />
+                            <Route path="/sample-redux" exact component={Example} />
+                        </Switch>
+                    </Router>
+                </AuthProvider>
+            </Provider>
         </div>
     )
 }

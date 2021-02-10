@@ -73,7 +73,7 @@ const RegistrationSetpTwo: React.FC = () => {
         }
     }
 
-    const uploadImage = async (e) => {
+    const uploadImage = async (e: any) => {
         const file = e.target.files[0]
         const fRef = firebase.storage().ref()
         const fileRef = fRef.child(file.name)
@@ -85,69 +85,69 @@ const RegistrationSetpTwo: React.FC = () => {
 
     return (
         <div className={classes.top}>
-            <Container size="sm">
-                <Grid container spacing={3}>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={4}>
-                        <Card style={{ padding: '20px' }}>
-                            {error && <Alert severity="error">{error}</Alert>}
-                            <form className={classes.root} noValidate autoComplete="off">
-                                <div className={classes.imgRoot}>
-                                    <Avatar type="file" className={classes.orange} src={imgUrl}></Avatar>
-                                </div>
+            {/* <Container size="sm"> */}
+            <Grid container spacing={3}>
+                <Grid item xs={4}></Grid>
+                <Grid item xs={4}>
+                    <Card style={{ padding: '20px' }}>
+                        {error && <Alert severity="error">{error}</Alert>}
+                        <form className={classes.root} noValidate autoComplete="off">
+                            <div className={classes.imgRoot}>
+                                {/* <Avatar type="file" className={classes.orange} src={imgUrl}></Avatar> */}
+                            </div>
 
-                                {!imgUrl && (
-                                    <TextField
-                                        id="standard-basic"
-                                        label="Upload Image"
-                                        type="file"
-                                        onChange={uploadImage}
-                                    />
-                                )}
+                            {!imgUrl && (
                                 <TextField
-                                    onChange={(e) => setMobileNumber(e.target.value)}
                                     id="standard-basic"
-                                    label="Mobile No"
-                                    type="number"
+                                    label="Upload Image"
+                                    type="file"
+                                    onChange={uploadImage}
                                 />
-                                <TextField
-                                    onChange={(e) => setQualification(e.target.value)}
-                                    id="standard-basic"
-                                    type="text"
-                                    label="Qualification"
-                                />
-                                <TextField
-                                    onChange={(e) => setDesignation(e.target.value)}
-                                    id="standard-basic"
-                                    type="text"
-                                    label="Designation"
-                                />
-                                <TextField
-                                    onChange={(e) => setCompany(e.target.value)}
-                                    id="standard-basic"
-                                    type="text"
-                                    label="Company"
-                                />
-                                <TextField
-                                    onChange={(e) => setAddress(e.target.value)}
-                                    id="standard-basic"
-                                    type="text"
-                                    label="Address"
-                                />
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    style={{ width: '42ch' }}
-                                    onClick={saveUserInformation}
-                                >
-                                    Finish Register
-                                </Button>
-                            </form>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={4}></Grid>
+                            )}
+                            <TextField
+                                onChange={(e) => setMobileNumber(e.target.value)}
+                                id="standard-basic"
+                                label="Mobile No"
+                                type="number"
+                            />
+                            <TextField
+                                onChange={(e) => setQualification(e.target.value)}
+                                id="standard-basic"
+                                type="text"
+                                label="Qualification"
+                            />
+                            <TextField
+                                onChange={(e) => setDesignation(e.target.value)}
+                                id="standard-basic"
+                                type="text"
+                                label="Designation"
+                            />
+                            <TextField
+                                onChange={(e) => setCompany(e.target.value)}
+                                id="standard-basic"
+                                type="text"
+                                label="Company"
+                            />
+                            <TextField
+                                onChange={(e) => setAddress(e.target.value)}
+                                id="standard-basic"
+                                type="text"
+                                label="Address"
+                            />
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                style={{ width: '42ch' }}
+                                onClick={saveUserInformation}
+                            >
+                                Finish Register
+                            </Button>
+                        </form>
+                    </Card>
                 </Grid>
-            </Container>
+                <Grid item xs={4}></Grid>
+            </Grid>
+            {/* </Container> */}
         </div>
     )
 }

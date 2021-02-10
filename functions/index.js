@@ -41,18 +41,25 @@ router.get('/fifth-route', (req, res) => {
     res.send('This is fifth firebase express route implementation example')
 })
 
-// exports.addNewUserData = functions.https.document('users').onCreate((req, res) => {
-// cors(req, res, () => {
-//     functions.logger.info('createUser logs!', { structuredData: true })
-//     const { first_name, last_name } = req.body
-//     console.log('first_name', first_name)
-//     console.log('last_name', last_name)
-//     console.log('Full name', first_name + ' ' + last_name)
-//     res.send(first_name + ' ' + last_name)
-// })
-// })
-exports.createUser = functions.firestore.document('/users/{userId}').onCreate((data, context) => {
+router.post('/addUser', async (req, res) => {
+    const { firstName, lastName } = req.body
+
+    try {
+        const myData = await db.collection('users').add({
+            firstName,
+            lastName,
+        })
+        return res.send(myData.data())
+    } catch (error) {
+        return res.send(error)
+    }
+})
+exports.createUser = functions.firestore.document('users/{userId}').onCreate((data, context) => {
     functions.logger.info('createUser logs!', { structuredData: true })
-    const userId = context.params.userId
-    console.log('The value of userId', userId)
+    return console.log('User is created', data.data())
+})
+
+exports.deleteUser = functions.firestore.document('/users/{userId}').onDelete((data, context) => {
+    functions.logger.info('createUser logs!', { structuredData: true })
+    return console.log('User is deleted')
 })

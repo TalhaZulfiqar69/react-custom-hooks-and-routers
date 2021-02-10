@@ -44,39 +44,39 @@ const Login: React.FC = () => {
 
     return (
         <div style={style}>
-            <Container size="sm">
-                <Grid container spacing={3}>
-                    <Grid item xs={4}></Grid>
-                    <Grid item xs={4}>
-                        <Card style={{ padding: '20px' }}>
-                            {passwordError && <Alert severity="error">{passwordError}</Alert>}
-                            <form className={classes.root} noValidate autoComplete="off">
-                                <TextField
-                                    id="standard-basic"
-                                    label="Email"
-                                    type="email"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                                <TextField
-                                    id="standard-basic"
-                                    type="password"
-                                    label="Password"
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                                <Button variant="outlined" color="primary" style={{ width: '42ch' }} onClick={login}>
-                                    Login
-                                </Button>
-                            </form>
-                            <br />
-                            <Link to="/forget-password">Forget Password</Link>
-                            <Link to="/register" className={classes.signupLink}>
-                                Signup
-                            </Link>
-                        </Card>
-                    </Grid>
-                    <Grid item xs={4}></Grid>
+            {/* <Container size="sm"> */}
+            <Grid container spacing={3}>
+                <Grid item xs={4}></Grid>
+                <Grid item xs={4}>
+                    <Card style={{ padding: '20px' }}>
+                        {passwordError && <Alert severity="error">{passwordError}</Alert>}
+                        <form className={classes.root} noValidate autoComplete="off">
+                            <TextField
+                                id="standard-basic"
+                                label="Email"
+                                type="email"
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <TextField
+                                id="standard-basic"
+                                type="password"
+                                label="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <Button variant="outlined" color="primary" style={{ width: '42ch' }} onClick={login}>
+                                Login
+                            </Button>
+                        </form>
+                        <br />
+                        <Link to="/forget-password">Forget Password</Link>
+                        <Link to="/register" className={classes.signupLink}>
+                            Signup
+                        </Link>
+                    </Card>
                 </Grid>
-            </Container>
+                <Grid item xs={4}></Grid>
+            </Grid>
+            {/* </Container> */}
         </div>
     )
 }
