@@ -7,13 +7,12 @@ const cors = require('cors')({ origin: true })
 admin.initializeApp(functions.config().firebase)
 
 const app = express()
-const router = require('express').Router()
-const main = express()
 const db = admin.firestore()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+const router = require('express').Router()
 exports.api = functions.https.onRequest(router)
 
 router.get('/first-route', (req, res) => {
