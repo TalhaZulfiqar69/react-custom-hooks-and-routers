@@ -54,6 +54,10 @@ const Header = () => {
                         <Link to="/change-password" style={style}>
                             Change Password
                         </Link>
+                        &nbsp;&nbsp;&nbsp;
+                        <Link to="/counter" style={style}>
+                            Redux
+                        </Link>
                     </Typography>
                 </Toolbar>
             </AppBar>

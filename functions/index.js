@@ -13,7 +13,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const router = require('express').Router()
-exports.api = functions.https.onRequest(router)
+
+exports.api = functions.https.onCall(router)
 
 router.get('/first-route', (req, res) => {
     console.log('This is first firebase express route implementation example')
@@ -53,6 +54,8 @@ router.post('/addUser', async (req, res) => {
         return res.send(error)
     }
 })
+
+// Triggers
 exports.createUser = functions.firestore.document('users/{userId}').onCreate((data, context) => {
     functions.logger.info('createUser logs!', { structuredData: true })
     return console.log('User is created', data.data())
