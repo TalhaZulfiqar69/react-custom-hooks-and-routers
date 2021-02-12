@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const Login: React.FC = () => {
+const Login: React.FC = (props: any) => {
+    console.log('all props ahhahaa', props)
     const { currentUser } = useContext(AuthContext)
     if (currentUser) {
         return <Redirect to="/profile" />
@@ -34,8 +35,13 @@ const Login: React.FC = () => {
     const login = async () => {
         const res = await LOGIN_USER({ email, password })
         const user = firebase.auth().currentUser
+        const userData = {
+            email,
+            password,
+        }
         if (user) {
             setPasswordError('')
+            props.loginHandler(userData)
             history.push('/profile')
         } else {
             setPasswordError(res)

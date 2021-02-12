@@ -36,11 +36,12 @@ import { firebase } from './util/firebase'
 
 // Typescript stuff
 import { Registration } from './typescripImplementation/authentication/Registration'
-import { Login } from './typescripImplementation/authentication/Login'
+// import { Login } from './typescripImplementation/authentication/Login'
+import Login from './containers/LoginContainer'
 import { ForgetPassword } from './typescripImplementation/authentication/ForgetPassword'
 import { ResetPassword } from './typescripImplementation/authentication/ResetPassword'
 import { RegistrationSetpTwo } from './typescripImplementation/authentication/RegistrationSetpTwo'
-import { Profile } from './typescripImplementation/authentication/Profile'
+import Profile from './typescripImplementation/authentication/Profile'
 // -------------------------
 import { CloudFunctionTask } from './components/CloudFunctionsTask'
 import Counter from './containers/CounterContainer'

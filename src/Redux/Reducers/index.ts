@@ -1,5 +1,9 @@
 import { combineReducers } from 'redux'
 import { counterReducer } from './CounterReducer'
-export default combineReducers({
-    counter: counterReducer
+import { authReducer } from './LoginReducer'
+const rootReducer = combineReducers({
+    counter: counterReducer,
+    auth: authReducer
 })
+
+export default rootReducer

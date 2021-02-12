@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 const router = require('express').Router()
 
-exports.api = functions.https.onCall(router)
+exports.api = functions.https.onRequest(router)
 
 router.get('/first-route', (req, res) => {
     console.log('This is first firebase express route implementation example')
