@@ -2,6 +2,7 @@ const functions = require('firebase-functions')
 const admin = require('firebase-admin')
 const express = require('express')
 const bodyParser = require('body-parser')
+const { response } = require('express')
 const cors = require('cors')({ origin: true })
 
 admin.initializeApp(functions.config().firebase)
@@ -12,7 +13,7 @@ const db = admin.firestore()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-const router = require('express').Router()
+const router = express.Router()
 
 exports.api = functions.https.onRequest(router)
 

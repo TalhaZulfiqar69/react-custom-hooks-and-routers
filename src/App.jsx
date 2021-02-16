@@ -45,7 +45,7 @@ import Profile from './typescripImplementation/authentication/Profile'
 // -------------------------
 import { CloudFunctionTask } from './components/CloudFunctionsTask'
 import Counter from './containers/CounterContainer'
-
+import TodoComponent from './containers/TodoContainer'
 import { Provider } from 'react-redux'
 // import store from './redux/store/index'
 function App() {
@@ -79,6 +79,7 @@ function App() {
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/cloudfunctions" exact component={CloudFunctionTask} />
                         <Route path="/counter" exact component={Counter} />
+                        <Route path="/todos" exact component={TodoComponent} />
                     </Switch>
                 </Router>
             </AuthProvider>

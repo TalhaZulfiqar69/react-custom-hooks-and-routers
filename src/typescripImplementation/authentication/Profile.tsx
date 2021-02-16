@@ -78,7 +78,7 @@ const Profile: React.FC = (props: any) => {
                         <Button variant="contained" color="primary" className={classes.bottom} onClick={logoutUser}>
                             Logout
                         </Button>
-                        <h5>Welcome BAWA G:</h5> {props.userData.login.email}
+                        <h5>Welcome: </h5> {props.userData.login.email}
                         {/* <h6>{firebase.auth().currentUser.email}</h6> */}
                         {data &&
                             data.map((d: any) => (

@@ -11,3 +11,13 @@ const mapDispatchToProps = (dispatch: (arg0: { type: string }) => any) => ({
     decrementHandler: () => dispatch(decrement()),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+
+// redux sause
+// redux saga
+// custom triggers
+// sequelizer 
+// postgres
+// routers
+// and axios
+
+// Functions, https callables
